@@ -3,473 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta
-name="description"
-content="Cuffin Cosmo Brands - Beauty, Cosmetics and Personal Care"
->
 <title>Cuffin Cosmo Brands</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <!-- ================= HEADER ================= -->
 <header class="header">
-<div class="logo">
-<h1>Cuffin</h1>
-<span>Cosmo Brands</span>
-</div>
+<div class="header-container">
+<a href="index.html" class="logo">
+<strong>CUFFIN</strong>
+<span>COSMO BRANDS</span>
+</a>
 <nav class="nav">
-<a href="#home">
-Home
-</a>
-<a href="#categories">
-Categories
-</a>
-<a href="#about">
-About Us
-</a>
-<a href="#contact">
-Contact
-</a>
+<a href="index.html">Home</a>
+<a href="#categories">Categories</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
 </nav>
 <div class="header-actions">
-<!-- Language -->
-<button
-type="button"
-class="language-button"
-id="language-button"
->
+<button id="language-button">
 AR
 </button>
-<!-- Cart -->
-<button
-type="button"
-class="cart-button"
-id="cart-button"
->
+<button id="cart-button">
 Cart
 <span id="cart-count">0</span>
 </button>
 </div>
+</div>
 </header>
-<!-- ================= MAIN ================= -->
-<main>
 <!-- ================= HERO ================= -->
-<section
-id="home"
-class="hero"
->
+<section class="hero">
 <div class="hero-content">
-<p class="hero-label">
-BEAUTY • COSMETICS • CARE
-</p>
-<h2>
-Discover Your
-<span>Beauty</span>
-</h2>
+<p class="hero-small">CUFFIN COSMO BRANDS</p>
+<h1>
+Beauty that
+<span>feels different.</span>
+</h1>
 <p class="hero-description">
-Discover your favorite beauty,
-cosmetics and personal care products
-in one place.
+Discover carefully selected cosmetics,
+beauty essentials and more.
 </p>
-<a
-href="#categories"
-class="hero-button"
->
-Explore Categories
+<a href="#categories" class="hero-button">
+Explore Collections
 </a>
 </div>
 </section>
 <!-- ================= CATEGORIES ================= -->
-<section
-id="categories"
-class="categories"
->
-<div class="section-title">
-<p>
-SHOP BY CATEGORY
-</p>
+<section class="categories" id="categories">
+<div class="section-heading">
+<div>
+<span class="eyebrow">SHOP BY CATEGORY</span>
 <h2>
-What Are You Looking For?
+Find your
+<span>favorites.</span>
 </h2>
-<span>
-Choose a category and discover our products
-</span>
+</div>
+<p>
+Explore our beauty collections.
+</p>
 </div>
 <div class="category-grid">
-<!-- SKIN CARE -->
-<a
-href="#products"
-class="category-card"
-data-category="Skin Care"
->
-<img
-src="images/skincare.jpg"
-alt="Skin Care"
->
-<div class="category-overlay">
-<div class="category-content">
-<h3>
-Skin Care
-</h3>
-<p>
-Care for your skin
-</p>
-</div>
+<a href="skincare.html" class="category-card large">
+<img src="images/skincare.jpg" alt="Skin Care">
+<div class="category-info">
+<span>01</span>
+<h3>Skin Care</h3>
+<p>Care for your skin.</p>
 </div>
 </a>
-<!-- HAIR CARE -->
-<a
-href="#products"
-class="category-card"
-data-category="Hair Care"
->
-<img
-src="images/haircare.jpg"
-alt="Hair Care"
->
-<div class="category-overlay">
-<div class="category-content">
-<h3>
-Hair Care
-</h3>
-<p>
-Everything for your hair
-</p>
-</div>
+<a href="haircare.html" class="category-card large">
+<img src="images/haircare.jpg" alt="Hair Care">
+<div class="category-info">
+<span>02</span>
+<h3>Hair Care</h3>
+<p>Love your hair.</p>
 </div>
 </a>
-<!-- MAKEUP -->
-<a
-href="#products"
-class="category-card"
-data-category="Makeup"
->
-<img
-src="images/makeup.jpg"
-alt="Makeup"
->
-<div class="category-overlay">
-<div class="category-content">
-<h3>
-Makeup
-</h3>
-<p>
-Express your beauty
-</p>
-</div>
+<a href="makeup.html" class="category-card">
+<img src="images/makeup.jpg" alt="Makeup">
+<div class="category-info">
+<span>03</span>
+<h3>Makeup</h3>
 </div>
 </a>
-<!-- BODY CARE -->
-<a
-href="#products"
-class="category-card"
-data-category="Body Care"
->
-<img
-src="images/bodycare.jpg"
-alt="Body Care"
->
-<div class="category-overlay">
-<div class="category-content">
-<h3>
-Body Care
-</h3>
-<p>
-Feel fresh and confident
-</p>
-</div>
+<a href="bodycare.html" class="category-card">
+<img src="images/bodycare.jpg" alt="Body Care">
+<div class="category-info">
+<span>04</span>
+<h3>Body Care</h3>
 </div>
 </a>
-<!-- FRAGRANCE -->
-<a
-href="#products"
-class="category-card"
-data-category="Fragrance"
->
-<img
-src="images/fragrance.jpg"
-alt="Fragrance"
->
-<div class="category-overlay">
-<div class="category-content">
-<h3>
-Fragrance
-</h3>
-<p>
-Find your signature scent
-</p>
-</div>
+<a href="fragrance.html" class="category-card">
+<img src="images/fragrance.jpg" alt="Fragrance">
+<div class="category-info">
+<span>05</span>
+<h3>Fragrance</h3>
 </div>
 </a>
-<!-- BEAUTY TOOLS -->
-<a
-href="#products"
-class="category-card"
-data-category="Beauty Tools"
->
-<img
-src="images/tools.jpg"
-alt="Beauty Tools"
->
-<div class="category-overlay">
-<div class="category-content">
-<h3>
-Beauty Tools
-</h3>
-<p>
-Tools for your beauty routine
-</p>
-</div>
+<a href="tools.html" class="category-card">
+<img src="images/tools.jpg" alt="Beauty Tools">
+<div class="category-info">
+<span>06</span>
+<h3>Beauty Tools</h3>
 </div>
 </a>
-</div>
-</section>
-<!-- ================= PRODUCTS ================= -->
-<section
-id="products"
-class="products-section"
->
-<div class="section-title">
-<p>
-OUR PRODUCTS
-</p>
-<h2 id="products-title">
-Products
-</h2>
-<span id="products-description">
-Choose a category above to explore products.
-</span>
-</div>
-<div
-id="product-container"
-class="product-grid"
->
-<!--
-Products will be added manually later.
-Each product can contain:
-- Product name
-- Product image
-- Category
-- Price
-- Description
-- Stock
--->
-<div class="products-placeholder">
-<div class="placeholder-icon">
-✨
-</div>
-<h3>
-Choose a Category
-</h3>
-<p>
-Select a category above to view
-available products.
-</p>
-</div>
-</div>
-</section>
-<!-- ================= ORDER ================= -->
-<section class="order-section">
-<div class="section-title">
-<p>
-ORDER NOW
-</p>
-<h2>
-Ready to Order?
-</h2>
-<span>
-Send your order directly through WhatsApp.
-</span>
-</div>
-<div class="order-box">
-<h3>
-Order Through WhatsApp
-</h3>
-<p>
-Choose your products and send us your
-order directly on WhatsApp.
-</p>
-<button
-type="button"
-id="whatsapp-order-button"
->
-Order Now
-</button>
 </div>
 </section>
 <!-- ================= ABOUT ================= -->
-<section
-id="about"
-class="about"
->
-<div class="about-content">
-<p class="section-label">
-ABOUT CUFFIN
-</p>
+<section class="about" id="about">
+<div class="about-text">
+<span class="eyebrow">ABOUT CUFFIN</span>
 <h2>
-Beauty Made
-<span>Simple.</span>
+Beauty,
+<span>simply.</span>
 </h2>
 <p>
-Cuffin Cosmo Brands is a beauty and
-personal care store created to bring
-your favorite beauty products together
-in one place.
+Cuffin Cosmo Brands brings together beauty
+products and cosmetics in one simple place.
 </p>
-<p>
-Explore skincare, hair care, makeup,
-body care, fragrances and beauty tools.
-</p>
+</div>
+<div class="about-badge">
+<strong>CC</strong>
+<span>COSMO BRANDS</span>
 </div>
 </section>
-<!-- ================= CONTACT ================= -->
-<section
-id="contact"
-class="contact"
->
-<div class="section-title">
-<p>
-GET IN TOUCH
-</p>
+<!-- ================= ORDER ================= -->
+<section class="order-section" id="contact">
+<div class="order-content">
+<div>
+<span class="eyebrow">ORDER NOW</span>
 <h2>
-Contact Us
+Ready to
+<span>order?</span>
 </h2>
-<span>
-We are here to help you.
-</span>
-</div>
-<div class="contact-box">
-<h3>
-Need Help?
-</h3>
 <p>
-Contact us through WhatsApp
-and we will be happy to help.
+Contact us directly through WhatsApp
+or Telegram.
 </p>
+</div>
+<div class="order-buttons">
 <a
 href="https://wa.me/201032212226"
 target="_blank"
-rel="noopener noreferrer"
-class="whatsapp-button"
->
-WhatsApp Us
-</a>
-</div>
-</section>
-<!-- ================= SOCIAL MEDIA ================= -->
-<section class="social-section">
-<div class="section-title">
-<p>
-FOLLOW CUFFIN
-</p>
-<h2>
-Follow Us
-</h2>
-<span>
-Stay connected with Cuffin Cosmo Brands.
-</span>
-</div>
-<div class="social-links">
-<!-- WHATSAPP GROUP -->
-<a
-href="https://chat.whatsapp.com/KXe1bAMLBfl829oYKYUZ1L"
-target="_blank"
-rel="noopener noreferrer"
-class="social-link whatsapp"
->
-<span class="social-icon">
-WA
-</span>
-<span>
-WhatsApp Group
-</span>
-</a>
-<!-- FACEBOOK GROUP -->
-<a
-href="https://www.facebook.com/share/g/1EkBftyrxY/"
-target="_blank"
-rel="noopener noreferrer"
-class="social-link facebook"
->
-<span class="social-icon">
-FB
-</span>
-<span>
-Facebook Group
-</span>
-</a>
-<!-- TIKTOK -->
-<a
-href="https://www.tiktok.com/@cuffin.cosmo.bran?_r=1&_t=ZS-99PMhXgE5wa"
-target="_blank"
-rel="noopener noreferrer"
-class="social-link tiktok"
->
-<span class="social-icon">
-TT
-</span>
-<span>
-TikTok
-</span>
-</a>
-</div>
-</section>
-</main>
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-<div class="footer-brand">
-<div class="logo">
-<h1>
-Cuffin
-</h1>
-<span>
-Cosmo Brands
-</span>
-</div>
-</div>
-<div class="footer-links">
-<a href="#home">
-Home
-</a>
-<a href="#categories">
-Categories
-</a>
-<a href="#about">
-About
-</a>
-<a href="#contact">
-Contact
-</a>
-</div>
-<div class="footer-social">
-<a
-href="https://chat.whatsapp.com/KXe1bAMLBfl829oYKYUZ1L"
-target="_blank"
-rel="noopener noreferrer"
+class="order-button whatsapp"
 >
 WhatsApp
 </a>
 <a
+href="https://t.me/shcuffin"
+target="_blank"
+class="order-button telegram"
+>
+Telegram
+</a>
+</div>
+</div>
+</section>
+<!-- ================= BRAND LINKS ================= -->
+<section class="brand-links">
+<span class="eyebrow">FOLLOW CUFFIN</span>
+<div class="brand-links-row">
+<a
 href="https://www.facebook.com/share/g/1EkBftyrxY/"
 target="_blank"
-rel="noopener noreferrer"
 >
 Facebook
 </a>
 <a
-href="https://www.tiktok.com/@cuffin.cosmo.bran?_r=1&_t=ZS-99PMhXgE5wa"
+href="https://chat.whatsapp.com/KXe1bAMLBfl829oYKYUZ1L"
 target="_blank"
-rel="noopener noreferrer"
+>
+WhatsApp
+</a>
+<a
+href="https://www.tiktok.com/@cuffin.cosmo.bran"
+target="_blank"
 >
 TikTok
 </a>
 </div>
-<p class="copyright">
-© 2026 Cuffin Cosmo Brands.
-All rights reserved.
+</section>
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+<div class="footer-container">
+<div class="footer-logo">
+<strong>CUFFIN</strong>
+<span>COSMO BRANDS</span>
+</div>
+<p>
+© 2026 Cuffin Cosmo Brands
 </p>
+</div>
 </footer>
-<!-- ================= JAVASCRIPT ================= -->
+<!-- ================= CART ================= -->
+<div id="cart-modal">
+<div class="cart-modal-content">
+<button id="close-cart">×</button>
+<h2>Your Cart</h2>
+<div id="cart-items"></div>
+<div id="cart-total">
+Total: 0 EGP
+</div>
+<button id="whatsapp-order-button">
+Order via WhatsApp
+</button>
+<button id="telegram-order-button">
+Order via Telegram
+</button>
+</div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>

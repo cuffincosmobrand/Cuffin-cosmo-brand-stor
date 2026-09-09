@@ -17,7 +17,16 @@ image: "images/product.jpg",
 description: "Product description"
 }
 */
-const products = [];
+const products = [
+    {
+        id: 1,
+        name: "passion baby fresh baby cologne",
+        category: "skin care",
+        price: 85,
+        image: "images/passion baby fresh baby cologne.jpg",
+        description: "passion baby fresh baby cologne"
+    }
+];
 /* =========================================
 CART
 ========================================= */

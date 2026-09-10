@@ -6,8 +6,7 @@ MAIN JAVASCRIPT
 PRODUCTS
 ========================================= */
 /*
-.نیدعب انھ طحتتھ تاجتنملا
-:لاثم
+:جتنم ةفاضإ لاثم
 {
 id: 1,
 name: "Product Name",
@@ -17,16 +16,7 @@ image: "images/product.jpg",
 description: "Product description"
 }
 */
-const products = [
-    {
-        id: 1,
-        name: "passion baby fresh baby cologne",
-        category: "skin care",
-        price: 85,
-        image: "images/passion baby fresh baby cologne.jpg",
-        description: "passion baby fresh baby cologne"
-    }
-];
+const products = [];
 /* =========================================
 CART
 ========================================= */
@@ -60,7 +50,9 @@ products.find(
 item => item.id === productId
 );
 if (!product) {
-alert("This product is not available yet.");
+alert(
+"This product is not available yet."
+);
 return;
 }
 cart.push(product);
@@ -68,7 +60,8 @@ saveCart();
 updateCartCount();
 renderCart();
 alert(
-product.name + " has been added to your cart."
+product.name +
+" has been added to your cart."
 );
 }
 /* =========================================
@@ -211,7 +204,8 @@ product.price +
 const total =
 cart.reduce(
 (sum, product) =>
-sum + Number(product.price),
+sum +
+Number(product.price),
 0
 );
 message +=
@@ -243,6 +237,68 @@ alert(
 }
 );
 }
+/* =========================================
+IMAGE LIGHTBOX
+CLICK PRODUCT IMAGE TO ENLARGE
+========================================= */
+document.addEventListener(
+"click",
+function (event) {
+const image =
+event.target.closest(
+".product-card img"
+);
+if (!image) {
+return;
+}
+const lightbox =
+document.createElement("div");
+lightbox.className =
+"image-lightbox";
+lightbox.innerHTML = `
+<div class="lightbox-content">
+<button
+class="lightbox-close"
+aria-label="Close">
+&times;
+</button>
+<img
+src="${image.src}"
+alt="${image.alt}">
+</div>
+`;
+document.body.appendChild(
+lightbox
+);
+/* CLOSE BY X OR OUTSIDE IMAGE */
+lightbox.addEventListener(
+"click",
+function (event) {
+if (
+event.target === lightbox ||
+event.target.classList.contains(
+"lightbox-close"
+)
+) {
+lightbox.remove();
+}
+}
+);
+/* CLOSE WITH ESC KEY */
+document.addEventListener(
+"keydown",
+function closeWithEscape(event) {
+if (event.key === "Escape") {
+lightbox.remove();
+document.removeEventListener(
+"keydown",
+closeWithEscape
+);
+}
+}
+);
+}
+);
 /* =========================================
 INITIALIZE
 ========================================= */

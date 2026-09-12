@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Body Care | Cuffin Cosmo Brands</title>
-<link rel="stylesheet" href="style.css">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+<title>
+Body Care | Cuffin Cosmo Brands
+</title>
+<link
+rel="stylesheet"
+href="style.css"
+>
 </head>
 <body>
 <!-- =========================
@@ -12,9 +20,16 @@ HEADER
 ========================= -->
 <header class="header">
 <div class="header-container">
-<a href="index.html" class="logo">
-<h1>Cuffin</h1>
-<span>Cosmo Brands</span>
+<a
+href="index.html"
+class="logo"
+>
+<h1>
+Cuffin
+</h1>
+<span>
+Cosmo Brands
+</span>
 </a>
 <nav class="nav">
 <a href="index.html">
@@ -36,7 +51,9 @@ AR
 </button>
 <button id="cart-button">
 🛒
-<span id="cart-count">0</span>
+<span id="cart-count">
+0
+</span>
 </button>
 </div>
 </div>
@@ -47,27 +64,120 @@ BODY CARE
 <main>
 <section class="products-section">
 <div class="products-header">
-<a href="index.html" class="back-button">
-← Back to Home
-</a>
-<h1>
+<div class="products-title">
+<h2>
 Body Care
-</h1>
+</h2>
 <p>
 Explore our Body Care collection.
 </p>
 </div>
-<!--
-PRODUCTS WILL BE ADDED HERE LATER
--->
+<a
+href="index.html"
+class="back-button"
+>
+← Back to Home
+</a>
+</div>
+<!-- =========================
+PRODUCTS
+========================= -->
 <div class="product-grid">
-<div class="empty-products">
-<h2>
-Coming Soon
-</h2>
+<!-- PRODUCT 22 -->
+<div class="product-card">
+<img
+src="images/sanosan-kids-shower-shampoo.jpg"
+alt="Sanosan Kids Shower & Shampoo"
+>
+<h3>
+Sanosan Kids Shower & Shampoo
+</h3>
 <p>
-Body Care products will be available soon.
+350 EGP
 </p>
+<button onclick="addToCart(22)">
+Add to Cart
+</button>
+</div>
+<!-- PRODUCT 23 -->
+<div class="product-card">
+<img
+src="images/sanosan-care-soap-milk.jpg"
+alt="Sanosan Care Soap Milk"
+>
+<h3>
+Sanosan Care Soap Milk
+</h3>
+<p>
+230 EGP
+</p>
+<button onclick="addToCart(23)">
+Add to Cart
+</button>
+</div>
+<!-- PRODUCT 24 -->
+<div class="product-card">
+<img
+src="images/sanosan-care-cream.jpg"
+alt="Sanosan Care Cream"
+>
+<h3>
+Sanosan Care Cream
+</h3>
+<p>
+340 EGP
+</p>
+<button onclick="addToCart(24)">
+Add to Cart
+</button>
+</div>
+<!-- PRODUCT 25 -->
+<div class="product-card">
+<img
+src="images/sanosan-baby-sun-cream-spf-50.jpg"
+alt="Sanosan Baby Sun Cream SPF 50+"
+>
+<h3>
+Sanosan Baby Sun Cream SPF 50+
+</h3>
+<p>
+650 EGP
+</p>
+<button onclick="addToCart(25)">
+Add to Cart
+</button>
+</div>
+<!-- PRODUCT 26 -->
+<div class="product-card">
+<img
+src="images/sanosan-baby-care-oil.jpg"
+alt="Sanosan Baby Care Oil"
+>
+<h3>
+Sanosan Baby Care Oil
+</h3>
+<p>
+300 EGP
+</p>
+<button onclick="addToCart(26)">
+Add to Cart
+</button>
+</div>
+<!-- PRODUCT 27 -->
+<div class="product-card">
+<img
+src="images/sanosan-baby-care-lotion.jpg"
+alt="Sanosan Baby Care Lotion"
+>
+<h3>
+Sanosan Baby Care Lotion
+</h3>
+<p>
+300 EGP
+</p>
+<button onclick="addToCart(27)">
+Add to Cart
+</button>
 </div>
 </div>
 </section>
@@ -76,28 +186,32 @@ Body Care products will be available soon.
 CART MODAL
 ========================= -->
 <div id="cart-modal">
-<div class="cart-modal-content">
-<button id="close-cart">
-×
-</button>
+<div class="cart-content">
+<div class="cart-header">
 <h2>
 Your Cart
 </h2>
+<button id="close-cart">
+×
+</button>
+</div>
 <div id="cart-items"></div>
 <div id="cart-total">
 Total: 0 EGP
 </div>
-<div class="cart-order-buttons">
+<div class="cart-actions">
 <a
 id="whatsapp-order-button"
 href="https://wa.me/201032212226"
-target="_blank">
+target="_blank"
+>
 Order via WhatsApp
 </a>
 <a
 id="telegram-order-button"
 href="https://t.me/shcuffin"
-target="_blank">
+target="_blank"
+>
 Order via Telegram
 </a>
 </div>

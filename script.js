@@ -310,7 +310,7 @@ const products = [
         id: 38,
         name: "VGR Voyager Professional Hair Trimmer (Model V-228)",
         category: "tools",
-        price: DM,
+        price: "DM",
         image: "images/VGR Voyager Professional Hair Trimmer (Model V-228).jpg",
         description: "VGR Voyager Professional Hair Trimmer (Model V-228)."
         }

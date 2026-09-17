@@ -305,7 +305,15 @@ const products = [
     price: 3500,
     image: "images/ceraveTherapeutic Hand Cream.jpg",
     description: "Hand cream."
-    }
+    },
+    {
+        id: 38,
+        name: "VGR Voyager Professional Hair Trimmer (Model V-228)",
+        category: "tools",
+        price: DM,
+        image: "images/VGR Voyager Professional Hair Trimmer (Model V-228).jpg",
+        description: "VGR Voyager Professional Hair Trimmer (Model V-228)."
+        }
     ];
     /* =========================================
     CART

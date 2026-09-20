@@ -307,21 +307,21 @@ const products = [
     description: "Hand cream."
     },
     {
-        id: 38,
-        name: "VGR Voyager Professional Hair Trimmer (Model V-228)",
-        category: "tools",
-        price: "DM",
-        image: "images/VGR Voyager Professional Hair Trimmer (Model V-228).jpg",
-        description: "VGR Voyager Professional Hair Trimmer (Model V-228)."
-        },
-        {
-            id: 39,
-            name: "teresia 100% aloe vera soothing gel",
-            category: "Skin Care",
-            price: 300,
-            image: "images/teresia 100% aloe vera soothing gel.jpg",
-            description: "soothing alovera gel for dry skin."
-            }
+    id: 38,
+    name: "VGR Voyager Professional Hair Trimmer (Model V-228)",
+    category: "tools",
+    price: "DM",
+    image: "images/VGR Voyager Professional Hair Trimmer (Model V-228).jpg",
+    description: "VGR Voyager Professional Hair Trimmer (Model V-228)."
+    },
+    {
+    id: 39,
+    name: "teresia 100% aloe vera soothing gel",
+    category: "Skin Care",
+    price: 300,
+    image: "images/teresia 100% aloe vera soothing gel.jpg",
+    description: "soothing alovera gel for dry skin."
+    }
     ];
     /* =========================================
     CART

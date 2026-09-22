@@ -233,12 +233,20 @@ MAIN STYLE
     rgba(7, 3, 12, 0.12)
     );
     }
-    .category-card-content {
+    .category-info {
     position: absolute;
     z-index: 2;
     left: 20px;
     right: 20px;
     bottom: 17px;
+    }
+    .category-info span {
+    display: inline-block;
+    margin-bottom: 4px;
+    color: #c9b9d5;
+    font-size: 10px;
+    letter-spacing: 2px;
+    opacity: 0.8;
     }
     .category-card h3 {
     font-size: 20px;
@@ -251,22 +259,47 @@ MAIN STYLE
     /* =========================================
     ABOUT
     ========================================= */
-    #about {
+    .about {
     padding: 50px 5%;
     background: #0e0a13;
-    }
-    .about-content {
-    max-width: 750px;
-    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
     text-align: center;
     }
-    .about-content h2 {
+    .about-text {
+    max-width: 750px;
+    }
+    .about-text h2 {
     font-size: 27px;
     margin-bottom: 12px;
     }
-    .about-content p {
+    .about-text p {
     color: #bdb3c4;
     font-size: 14px;
+    }
+    .about-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid rgba(180, 100, 255, 0.3);
+    background: rgba(130, 55, 190, 0.08);
+    }
+    .about-badge strong {
+    font-size: 22px;
+    letter-spacing: 2px;
+    }
+    .about-badge span {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: #b77cff;
+    margin-top: 4px;
     }
     /* =========================================
     ORDER SECTION
@@ -304,33 +337,40 @@ MAIN STYLE
     font-weight: 700;
     border: 1px solid rgba(185, 100, 255, 0.3);
     background: #18101f;
+    color: #ffffff;
     transition: 0.25s ease;
+    display: inline-block;
     }
     .order-button:hover {
-    background: #6e29a0;
     transform: translateY(-2px);
     }
     /* =========================================
-    WHATSAPP BUTTON
+    WHATSAPP BUTTONS (SHARED STYLE)
     ========================================= */
-    #whatsapp-order-button {
+    .order-button.whatsapp,
+    #whatsapp-order-button-m,
+    #whatsapp-order-button-f {
     background: #25D366;
     border-color: #25D366;
     color: #ffffff;
     }
-    #whatsapp-order-button:hover {
+    .order-button.whatsapp:hover,
+    #whatsapp-order-button-m:hover,
+    #whatsapp-order-button-f:hover {
     background: #1ebe5d;
     border-color: #1ebe5d;
     transform: translateY(-2px);
     }
     /* =========================================
-    TELEGRAM BUTTON
+    TELEGRAM BUTTON (SHARED STYLE)
     ========================================= */
+    .order-button.telegram,
     #telegram-order-button {
     background: #229ED9;
     border-color: #229ED9;
     color: #ffffff;
     }
+    .order-button.telegram:hover,
     #telegram-order-button:hover {
     background: #168ac2;
     border-color: #168ac2;
@@ -343,7 +383,7 @@ MAIN STYLE
     padding: 25px 5%;
     background: #0b0810;
     }
-    .brand-links-container {
+    .brand-links-row {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -514,7 +554,8 @@ MAIN STYLE
     visibility: visible;
     opacity: 1;
     }
-    .cart-content {
+    .cart-content,
+    .cart-modal-content {
     width: min(390px, 92%);
     height: 100%;
     padding: 22px;
@@ -524,7 +565,8 @@ MAIN STYLE
     transition: 0.3s ease;
     overflow-y: auto;
     }
-    #cart-modal.active .cart-content {
+    #cart-modal.active .cart-content,
+    #cart-modal.active .cart-modal-content {
     transform: translateX(0);
     }
     .cart-header {
@@ -577,17 +619,22 @@ MAIN STYLE
     display: flex;
     gap: 8px;
     flex-direction: column;
+    margin-top: 8px;
     }
     .cart-actions a,
-    .cart-actions button {
+    .cart-actions button,
+    #whatsapp-order-button-m,
+    #whatsapp-order-button-f,
+    #telegram-order-button {
+    display: block;
     width: 100%;
     padding: 10px;
     border-radius: 8px;
     border: 1px solid rgba(180, 100, 255, 0.25);
-    background: #191020;
-    color: #ffffff;
     text-align: center;
     font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
     }
     /* =========================================
     IMAGE LIGHTBOX
@@ -737,7 +784,7 @@ MAIN STYLE
     .category-card:nth-child(2) {
     min-height: 150px;
     }
-    .category-card-content {
+    .category-info {
     left: 13px;
     right: 13px;
     bottom: 12px;
@@ -748,13 +795,13 @@ MAIN STYLE
     .category-card p {
     display: none;
     }
-    #about {
+    .about {
     padding: 40px 6%;
     }
-    .about-content h2 {
+    .about-text h2 {
     font-size: 23px;
     }
-    .about-content p {
+    .about-text p {
     font-size: 12px;
     }
     #contact {
@@ -804,7 +851,8 @@ MAIN STYLE
     padding: 25px 15px;
     margin: 10px auto;
     }
-    .cart-content {
+    .cart-content,
+    .cart-modal-content {
     width: 92%;
     padding: 18px;
     }

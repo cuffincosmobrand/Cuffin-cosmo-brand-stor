@@ -375,6 +375,16 @@ const products = [
         price: 300,
         image: "images/sanosan-baby-care-lotion.jpg",
         description: "Baby care lotion."
+    },
+    
+    /* ---------- GKHAIR (HAIR CARE) ---------- */
+    {
+        id: 46,
+        name: "GKhair Moisturizing Shampoo",
+        category: "Hair Care",
+        price: 1000,
+        image: "images/gkhair-moisturizing-shampoo.jpg",
+        description: "Moisturizing shampoo for smooth, hydrated hair."
     }
     ];
     

@@ -181,39 +181,60 @@ TikTok
 </p>
 </div>
 </footer>
-<!-- ================= CART ================= -->
+<!-- =========================
+CART MODAL
+========================= -->
 <div id="cart-modal">
-<div class="cart-modal-content">
-<button id="close-cart">×</button>
+<div class="cart-content">
+<div class="cart-header">
 <h2>Your Cart</h2>
-<div id="cart-items"></div>
-<div id="cart-total">
-Total: 0 EGP
+<button id="close-cart">×</button>
 </div>
-
-id="whatsapp-order-button-m"
-href="#"
-target="_blank"
-class="order-button whatsapp"
->
-Order via WhatsApp (M)
+<div id="cart-items"></div>
+<div id="cart-total">Total: 0 EGP</div>
+<div class="cart-actions">
+<button id="start-order-button" class="order-button whatsapp">
+إتمام الطلب
+</button>
+</div>
+</div>
+</div>
+<!-- =========================
+REFERRAL MODAL
+========================= -->
+<div id="referral-modal">
+<div class="referral-content">
+<button id="close-referral">×</button>
+<div id="referral-step-1">
+<h3>هل طلبك من خلال مسوق؟</h3>
+<button id="referral-yes" class="referral-option-btn">
+من خلال مسوق
+</button>
+<button id="referral-no" class="referral-option-btn">
+من دون مسوق
+</button>
+</div>
+<div id="referral-step-2" style="display:none;">
+<h3>اختر كود المسوق</h3>
+<button class="referral-code-btn" data-code="CCB100">
+CCB100
+</button>
+<button class="referral-code-btn" data-code="CCB101">
+CCB101
+</button>
+</div>
+<div id="referral-step-3" style="display:none;">
+<h3>اختر وسيلة التواصل</h3>
+<a id="final-whatsapp-m" href="#" target="_blank" class="order-button whatsapp">
+واتساب (M)
 </a>
-
-id="whatsapp-order-button-f"
-href="#"
-target="_blank"
-class="order-button whatsapp"
->
-Order via WhatsApp (F)
+<a id="final-whatsapp-f" href="#" target="_blank" class="order-button whatsapp">
+واتساب (F)
 </a>
-
-id="telegram-order-button"
-href="https://t.me/shcuffin"
-target="_blank"
-class="order-button telegram"
->
-Order via Telegram
+<a id="final-telegram" href="#" target="_blank" class="order-button telegram">
+تيليجرام
 </a>
+</div>
 </div>
 </div>
 <script src="script.js"></script>

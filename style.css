@@ -637,6 +637,76 @@ MAIN STYLE
     margin-bottom: 8px;
     }
     /* =========================================
+    REFERRAL MODAL
+    ========================================= */
+    #referral-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 200;
+    transition: 0.25s ease;
+    padding: 20px;
+    }
+    #referral-modal.active {
+    visibility: visible;
+    opacity: 1;
+    }
+    .referral-content {
+    width: min(360px, 100%);
+    background: #100b15;
+    border: 1px solid rgba(181, 95, 255, 0.25);
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+    text-align: center;
+    direction: rtl;
+    }
+    .referral-content h3 {
+    font-size: 16px;
+    margin-bottom: 18px;
+    }
+    #close-referral {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(180, 100, 255, 0.25);
+    border-radius: 8px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    }
+    .referral-option-btn,
+    .referral-code-btn {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    margin-bottom: 10px;
+    border-radius: 9px;
+    border: 1px solid rgba(180, 100, 255, 0.3);
+    background: #18101f;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.25s ease;
+    }
+    .referral-option-btn:hover,
+    .referral-code-btn:hover {
+    background: #6e29a0;
+    }
+    #referral-step-3 .order-button {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    }
+    /* =========================================
     IMAGE LIGHTBOX
     ========================================= */
     .image-lightbox {
@@ -854,6 +924,9 @@ MAIN STYLE
     .cart-content,
     .cart-modal-content {
     width: 92%;
+    padding: 18px;
+    }
+    .referral-content {
     padding: 18px;
     }
     .lightbox-content {

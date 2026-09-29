@@ -80,7 +80,7 @@ const products = [
         image: "images/cosrx-the-hyaluronic-acid-3.jpg",
         description: "Hyaluronic acid serum."
     },
-    
+
     /* ---------- ANUA ---------- */
     {
         id: 10,
@@ -114,7 +114,7 @@ const products = [
         image: "images/anua-air-fit-uv-defense-sun-cream.jpg",
         description: "UV defense sun cream."
     },
-    
+
     /* ---------- THE ORDINARY ---------- */
     {
         id: 14,
@@ -180,7 +180,7 @@ const products = [
         image: "images/the-ordinary-aha-30-bha-2-peeling-solution.jpg",
         description: "AHA and BHA peeling solution."
     },
-    
+
     /* ---------- CERAVE ---------- */
     {
         id: 22,
@@ -326,7 +326,7 @@ const products = [
         image: "images/teresia-100-aloe-vera-soothing-gel.jpg",
         description: "Soothing aloe vera gel for dry skin."
     },
-    
+
     /* ---------- SANOSAN (BODY CARE) ---------- */
     {
         id: 40,
@@ -376,7 +376,7 @@ const products = [
         image: "images/sanosan-baby-care-lotion.jpg",
         description: "Baby care lotion."
     },
-    
+
     /* ---------- GKHAIR (HAIR CARE) ---------- */
     {
         id: 46,
@@ -386,415 +386,568 @@ const products = [
         image: "images/gkhair-moisturizing-shampoo.jpg",
         description: "Moisturizing shampoo for smooth, hydrated hair."
     }
-    ];
-    
-    /* =========================================
-    CART
-    ========================================= */
-    let cart = JSON.parse(
-        localStorage.getItem("cuffinCart")
-    ) || [];
-    
-    /* =========================================
-    SAVE CART
-    ========================================= */
-    function saveCart() {
-        localStorage.setItem(
-            "cuffinCart",
-            JSON.stringify(cart)
+];
+
+/* =========================================
+CART
+========================================= */
+let cart = JSON.parse(
+    localStorage.getItem("cuffinCart")
+) || [];
+
+/* =========================================
+SAVE CART
+========================================= */
+function saveCart() {
+    localStorage.setItem(
+        "cuffinCart",
+        JSON.stringify(cart)
+    );
+}
+
+/* =========================================
+UPDATE CART COUNT
+========================================= */
+function updateCartCount() {
+    const cartCount = document.getElementById("cart-count");
+    if (!cartCount) {
+        return;
+    }
+    cartCount.textContent = cart.length;
+}
+
+/* =========================================
+ADD TO CART
+========================================= */
+function addToCart(productId) {
+    const product =
+        products.find(
+            item => item.id === productId
         );
-    }
-    
-    /* =========================================
-    UPDATE CART COUNT
-    ========================================= */
-    function updateCartCount() {
-        const cartCount = document.getElementById("cart-count");
-        if (!cartCount) {
-            return;
-        }
-        cartCount.textContent = cart.length;
-    }
-    
-    /* =========================================
-    ADD TO CART
-    ========================================= */
-    function addToCart(productId) {
-        const product =
-            products.find(
-                item => item.id === productId
-            );
-    
-        if (!product) {
-            alert(
-                "This product is not available yet."
-            );
-            return;
-        }
-    
-        cart.push(product);
-        saveCart();
-        updateCartCount();
-        renderCart();
-    
-        const cartModal =
-            document.getElementById(
-                "cart-modal"
-            );
-    
-        if (cartModal) {
-            cartModal.classList.add(
-                "active"
-            );
-        }
-    }
-    
-    /* =========================================
-    REMOVE FROM CART
-    ========================================= */
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        saveCart();
-        updateCartCount();
-        renderCart();
-        prepareWhatsAppOrder();
-    }
-    
-    /* =========================================
-    RENDER CART
-    ========================================= */
-    function renderCart() {
-        const cartItems = document.getElementById("cart-items");
-        const cartTotal = document.getElementById("cart-total");
-    
-        if (!cartItems || !cartTotal) {
-            return;
-        }
-    
-        cartItems.innerHTML = "";
-    
-        /* EMPTY CART */
-        if (cart.length === 0) {
-            cartItems.innerHTML = `
-                <div class="empty-products">
-                    <p>Your cart is empty.</p>
-                </div>
-            `;
-            cartTotal.textContent =
-                "Total: 0 EGP";
-            prepareWhatsAppOrder();
-            return;
-        }
-    
-        /* CALCULATE TOTAL */
-        let total = 0;
-    
-        /* CREATE CART ITEMS */
-        cart.forEach(
-            (product, index) => {
-                total += Number(
-                    product.price
-                );
-    
-                const item = document.createElement("div");
-                item.className =
-                    "cart-item";
-    
-                item.innerHTML = `
-                    <div class="cart-item-info">
-                        <h3>
-                            ${product.name}
-                        </h3>
-                        <p>
-                            ${product.price} EGP
-                        </p>
-                    </div>
-                    <button
-                        onclick="removeFromCart(${index})">
-                        Remove
-                    </button>
-                `;
-    
-                cartItems.appendChild(item);
-            }
+
+    if (!product) {
+        alert(
+            "This product is not available yet."
         );
-    
-        /* SHOW TOTAL */
-        cartTotal.textContent =
-            "Total: " +
-            total +
-            " EGP";
-    
-        prepareWhatsAppOrder();
+        return;
     }
-    
-    /* =========================================
-    OPEN CART
-    ========================================= */
-    const cartButton =
-        document.getElementById(
-            "cart-button"
-        );
-    
-    if (cartButton) {
-        cartButton.addEventListener(
-            "click",
-            function () {
-                const cartModal =
-                    document.getElementById(
-                        "cart-modal"
-                    );
-    
-                if (cartModal) {
-                    cartModal.classList.add(
-                        "active"
-                    );
-                    renderCart();
-                }
-            }
-        );
-    }
-    
-    /* =========================================
-    CLOSE CART
-    ========================================= */
-    const closeCart =
-        document.getElementById(
-            "close-cart"
-        );
-    
-    if (closeCart) {
-        closeCart.addEventListener(
-            "click",
-            function () {
-                const cartModal =
-                    document.getElementById(
-                        "cart-modal"
-                    );
-    
-                if (cartModal) {
-                    cartModal.classList.remove(
-                        "active"
-                    );
-                }
-            }
-        );
-    }
-    
-    /* =========================================
-    CLOSE CART WHEN CLICKING OUTSIDE
-    ========================================= */
+
+    cart.push(product);
+    saveCart();
+    updateCartCount();
+    renderCart();
+
     const cartModal =
         document.getElementById(
             "cart-modal"
         );
-    
+
     if (cartModal) {
-        cartModal.addEventListener(
-            "click",
-            function (event) {
-                if (
-                    event.target === cartModal
-                ) {
-                    cartModal.classList.remove(
-                        "active"
-                    );
-                }
-            }
+        cartModal.classList.add(
+            "active"
         );
     }
-    
-    /* =========================================
-    BUILD ORDER MESSAGE
-    ========================================= */
-    function buildOrderMessage() {
-        let message =
-            "Hello Cuffin Cosmo Brands!\n\n";
-        message +=
-            "I would like to order:\n\n";
-    
-        cart.forEach(
-            (product, index) => {
-                message +=
-                    (index + 1) +
-                    ". " +
-                    product.name +
-                    " - " +
-                    product.price +
-                    " EGP\n";
-            }
-        );
-    
-        const total =
-            cart.reduce(
-                (sum, product) =>
-                    sum +
-                    Number(product.price),
-                0
-            );
-    
-        message +=
-            "\nTotal: " +
-            total +
-            " EGP";
-    
-        return message;
-    }
-    
-    /* =========================================
-    PREPARE WHATSAPP ORDER LINKS
-    ========================================= */
-    function prepareWhatsAppOrder() {
-        const message = buildOrderMessage();
-        const encodedMessage =
-            encodeURIComponent(message);
-    
-        const whatsappM =
-            document.getElementById(
-                "whatsapp-order-button-m"
-            );
-        if (whatsappM) {
-            whatsappM.href =
-                "https://wa.me/201554066087?text=" +
-                encodedMessage;
-        }
-    
-        const whatsappF =
-            document.getElementById(
-                "whatsapp-order-button-f"
-            );
-        if (whatsappF) {
-            whatsappF.href =
-                "https://wa.me/201032212226?text=" +
-                encodedMessage;
-        }
-    }
-    
-    /* =========================================
-    GUARD ORDER BUTTONS WHEN CART IS EMPTY
-    ========================================= */
-    function guardOrderButton(button) {
-        if (!button) {
-            return;
-        }
-        button.addEventListener(
-            "click",
-            function (event) {
-                if (cart.length === 0) {
-                    event.preventDefault();
-                    alert(
-                        "Your cart is empty."
-                    );
-                }
-            }
-        );
-    }
-    
-    guardOrderButton(
-        document.getElementById(
-            "whatsapp-order-button-m"
-        )
-    );
-    guardOrderButton(
-        document.getElementById(
-            "whatsapp-order-button-f"
-        )
-    );
-    
-    /* =========================================
-    LANGUAGE BUTTON
-    ========================================= */
-    const languageButton =
-        document.getElementById(
-            "language-button"
-        );
-    
-    if (languageButton) {
-        languageButton.addEventListener(
-            "click",
-            function () {
-                alert(
-                    "Arabic version will be available soon."
-                );
-            }
-        );
-    }
-    
-    /* =========================================
-    IMAGE LIGHTBOX
-    CLICK PRODUCT IMAGE TO ENLARGE
-    ========================================= */
-    document.addEventListener(
-        "click",
-        function (event) {
-            const image =
-                event.target.closest(
-                    ".product-card img"
-                );
-    
-            if (!image) {
-                return;
-            }
-    
-            /* CREATE LIGHTBOX */
-            const lightbox = document.createElement("div");
-            lightbox.className =
-                "image-lightbox";
-    
-            lightbox.innerHTML = `
-                <div class="lightbox-content">
-                    <button
-                        class="lightbox-close"
-                        aria-label="Close">
-                        &times;
-                    </button>
-                    <img
-                        src="${image.src}"
-                        alt="${image.alt || ""}">
-                </div>
-            `;
-    
-            document.body.appendChild(
-                lightbox
-            );
-    
-            /* CLOSE BY X OR OUTSIDE IMAGE */
-            lightbox.addEventListener(
-                "click",
-                function (event) {
-                    if (
-                        event.target === lightbox ||
-                        event.target.classList.contains(
-                            "lightbox-close"
-                        )
-                    ) {
-                        lightbox.remove();
-                    }
-                }
-            );
-    
-            /* CLOSE WITH ESC */
-            function closeWithEscape(event) {
-                if (
-                    event.key === "Escape"
-                ) {
-                    lightbox.remove();
-                    document.removeEventListener(
-                        "keydown",
-                        closeWithEscape
-                    );
-                }
-            }
-    
-            document.addEventListener(
-                "keydown",
-                closeWithEscape
-            );
-        }
-    );
-    
-    /* =========================================
-    INITIALIZE
-    ========================================= */
+}
+
+/* =========================================
+REMOVE FROM CART
+========================================= */
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
     updateCartCount();
     renderCart();
+}
+
+/* =========================================
+RENDER CART
+========================================= */
+function renderCart() {
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+
+    if (!cartItems || !cartTotal) {
+        return;
+    }
+
+    cartItems.innerHTML = "";
+
+    /* EMPTY CART */
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+            <div class="empty-products">
+                <p>Your cart is empty.</p>
+            </div>
+        `;
+        cartTotal.textContent =
+            "Total: 0 EGP";
+        return;
+    }
+
+    /* CALCULATE TOTAL */
+    let total = 0;
+
+    /* CREATE CART ITEMS */
+    cart.forEach(
+        (product, index) => {
+            total += Number(
+                product.price
+            );
+
+            const item = document.createElement("div");
+            item.className =
+                "cart-item";
+
+            item.innerHTML = `
+                <div class="cart-item-info">
+                    <h3>
+                        ${product.name}
+                    </h3>
+                    <p>
+                        ${product.price} EGP
+                    </p>
+                </div>
+                <button
+                    onclick="removeFromCart(${index})">
+                    Remove
+                </button>
+            `;
+
+            cartItems.appendChild(item);
+        }
+    );
+
+    /* SHOW TOTAL */
+    cartTotal.textContent =
+        "Total: " +
+        total +
+        " EGP";
+}
+
+/* =========================================
+OPEN CART
+========================================= */
+const cartButton =
+    document.getElementById(
+        "cart-button"
+    );
+
+if (cartButton) {
+    cartButton.addEventListener(
+        "click",
+        function () {
+            const cartModal =
+                document.getElementById(
+                    "cart-modal"
+                );
+
+            if (cartModal) {
+                cartModal.classList.add(
+                    "active"
+                );
+                renderCart();
+            }
+        }
+    );
+}
+
+/* =========================================
+CLOSE CART
+========================================= */
+const closeCart =
+    document.getElementById(
+        "close-cart"
+    );
+
+if (closeCart) {
+    closeCart.addEventListener(
+        "click",
+        function () {
+            const cartModal =
+                document.getElementById(
+                    "cart-modal"
+                );
+
+            if (cartModal) {
+                cartModal.classList.remove(
+                    "active"
+                );
+            }
+        }
+    );
+}
+
+/* =========================================
+CLOSE CART WHEN CLICKING OUTSIDE
+========================================= */
+const cartModal =
+    document.getElementById(
+        "cart-modal"
+    );
+
+if (cartModal) {
+    cartModal.addEventListener(
+        "click",
+        function (event) {
+            if (
+                event.target === cartModal
+            ) {
+                cartModal.classList.remove(
+                    "active"
+                );
+            }
+        }
+    );
+}
+
+/* =========================================
+BUILD ORDER MESSAGE
+========================================= */
+function buildOrderMessage(referralCode) {
+    let message =
+        "Hello Cuffin Cosmo Brands!\n\n";
+    message +=
+        "I would like to order:\n\n";
+
+    cart.forEach(
+        (product, index) => {
+            message +=
+                (index + 1) +
+                ". " +
+                product.name +
+                " - " +
+                product.price +
+                " EGP\n";
+        }
+    );
+
+    const total =
+        cart.reduce(
+            (sum, product) =>
+                sum +
+                Number(product.price),
+            0
+        );
+
+    message +=
+        "\nTotal: " +
+        total +
+        " EGP";
+
+    if (referralCode) {
+        message +=
+            "\n\nReferral Code: " +
+            referralCode;
+    } else {
+        message +=
+            "\n\nReferral Code: Direct Order (No Referral)";
+    }
+
+    return message;
+}
+
+/* =========================================
+REFERRAL FLOW (POPUP STEPS)
+========================================= */
+let selectedReferralCode = "";
+
+function openReferralModal() {
+    if (cart.length === 0) {
+        alert(
+            "Your cart is empty."
+        );
+        return;
+    }
+
+    selectedReferralCode = "";
+
+    const referralModal =
+        document.getElementById(
+            "referral-modal"
+        );
+
+    if (!referralModal) {
+        return;
+    }
+
+    showReferralStep(1);
+    referralModal.classList.add(
+        "active"
+    );
+}
+
+function closeReferralModal() {
+    const referralModal =
+        document.getElementById(
+            "referral-modal"
+        );
+
+    if (referralModal) {
+        referralModal.classList.remove(
+            "active"
+        );
+    }
+}
+
+function showReferralStep(stepNumber) {
+    const step1 =
+        document.getElementById(
+            "referral-step-1"
+        );
+    const step2 =
+        document.getElementById(
+            "referral-step-2"
+        );
+    const step3 =
+        document.getElementById(
+            "referral-step-3"
+        );
+
+    if (step1) {
+        step1.style.display =
+            stepNumber === 1 ? "block" : "none";
+    }
+    if (step2) {
+        step2.style.display =
+            stepNumber === 2 ? "block" : "none";
+    }
+    if (step3) {
+        step3.style.display =
+            stepNumber === 3 ? "block" : "none";
+    }
+}
+
+function prepareFinalOrderLinks() {
+    const message =
+        buildOrderMessage(
+            selectedReferralCode
+        );
+    const encodedMessage =
+        encodeURIComponent(message);
+
+    const finalWhatsappM =
+        document.getElementById(
+            "final-whatsapp-m"
+        );
+    if (finalWhatsappM) {
+        finalWhatsappM.href =
+            "https://wa.me/201554066087?text=" +
+            encodedMessage;
+    }
+
+    const finalWhatsappF =
+        document.getElementById(
+            "final-whatsapp-f"
+        );
+    if (finalWhatsappF) {
+        finalWhatsappF.href =
+            "https://wa.me/201032212226?text=" +
+            encodedMessage;
+    }
+
+    const finalTelegram =
+        document.getElementById(
+            "final-telegram"
+        );
+    if (finalTelegram) {
+        finalTelegram.href =
+            "https://t.me/shcuffin";
+    }
+}
+
+/* START ORDER BUTTON (OPENS REFERRAL MODAL) */
+const startOrderButton =
+    document.getElementById(
+        "start-order-button"
+    );
+
+if (startOrderButton) {
+    startOrderButton.addEventListener(
+        "click",
+        openReferralModal
+    );
+}
+
+/* CLOSE REFERRAL MODAL BUTTON */
+const closeReferralButton =
+    document.getElementById(
+        "close-referral"
+    );
+
+if (closeReferralButton) {
+    closeReferralButton.addEventListener(
+        "click",
+        closeReferralModal
+    );
+}
+
+/* CLOSE REFERRAL MODAL WHEN CLICKING OUTSIDE */
+const referralModalElement =
+    document.getElementById(
+        "referral-modal"
+    );
+
+if (referralModalElement) {
+    referralModalElement.addEventListener(
+        "click",
+        function (event) {
+            if (
+                event.target === referralModalElement
+            ) {
+                closeReferralModal();
+            }
+        }
+    );
+}
+
+/* STEP 1: YES (VIA REFERRAL) */
+const referralYesButton =
+    document.getElementById(
+        "referral-yes"
+    );
+
+if (referralYesButton) {
+    referralYesButton.addEventListener(
+        "click",
+        function () {
+            showReferralStep(2);
+        }
+    );
+}
+
+/* STEP 1: NO (DIRECT ORDER) */
+const referralNoButton =
+    document.getElementById(
+        "referral-no"
+    );
+
+if (referralNoButton) {
+    referralNoButton.addEventListener(
+        "click",
+        function () {
+            selectedReferralCode = "";
+            prepareFinalOrderLinks();
+            showReferralStep(3);
+        }
+    );
+}
+
+/* STEP 2: SELECT REFERRAL CODE */
+const referralCodeButtons =
+    document.querySelectorAll(
+        ".referral-code-btn"
+    );
+
+referralCodeButtons.forEach(
+    function (button) {
+        button.addEventListener(
+            "click",
+            function () {
+                selectedReferralCode =
+                    button.getAttribute(
+                        "data-code"
+                    );
+                prepareFinalOrderLinks();
+                showReferralStep(3);
+            }
+        );
+    }
+);
+
+/* =========================================
+LANGUAGE BUTTON
+========================================= */
+const languageButton =
+    document.getElementById(
+        "language-button"
+    );
+
+if (languageButton) {
+    languageButton.addEventListener(
+        "click",
+        function () {
+            alert(
+                "Arabic version will be available soon."
+            );
+        }
+    );
+}
+
+/* =========================================
+IMAGE LIGHTBOX
+CLICK PRODUCT IMAGE TO ENLARGE
+========================================= */
+document.addEventListener(
+    "click",
+    function (event) {
+        const image =
+            event.target.closest(
+                ".product-card img"
+            );
+
+        if (!image) {
+            return;
+        }
+
+        /* CREATE LIGHTBOX */
+        const lightbox = document.createElement("div");
+        lightbox.className =
+            "image-lightbox";
+
+        lightbox.innerHTML = `
+            <div class="lightbox-content">
+                <button
+                    class="lightbox-close"
+                    aria-label="Close">
+                    &times;
+                </button>
+                <img
+                    src="${image.src}"
+                    alt="${image.alt || ""}">
+            </div>
+        `;
+
+        document.body.appendChild(
+            lightbox
+        );
+
+        /* CLOSE BY X OR OUTSIDE IMAGE */
+        lightbox.addEventListener(
+            "click",
+            function (event) {
+                if (
+                    event.target === lightbox ||
+                    event.target.classList.contains(
+                        "lightbox-close"
+                    )
+                ) {
+                    lightbox.remove();
+                }
+            }
+        );
+
+        /* CLOSE WITH ESC */
+        function closeWithEscape(event) {
+            if (
+                event.key === "Escape"
+            ) {
+                lightbox.remove();
+                document.removeEventListener(
+                    "keydown",
+                    closeWithEscape
+                );
+            }
+        }
+
+        document.addEventListener(
+            "keydown",
+            closeWithEscape
+        );
+    }
+);
+
+/* =========================================
+INITIALIZE
+========================================= */
+updateCartCount();
+renderCart();

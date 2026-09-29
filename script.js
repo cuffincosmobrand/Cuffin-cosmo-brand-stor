@@ -315,7 +315,7 @@ const products = [
         name: "VGR Voyager Professional Hair Trimmer (Model V-228)",
         category: "tools",
         price: "DM",
-        image: "images/VGR Voyager Professional Hair Trimmer (Model V-228).jpg",
+        image: "images/vgr-voyager-professional-hair-trimmer-v228.jpg",
         description: "VGR Voyager Professional Hair Trimmer (Model V-228)."
     },
     {
@@ -484,19 +484,30 @@ function renderCart() {
         return;
     }
 
-    /* CALCULATE TOTAL */
+    /* CALCULATE TOTAL (SKIP NON-NUMERIC PRICES LIKE "DM") */
     let total = 0;
+    let hasCustomPrice = false;
 
     /* CREATE CART ITEMS */
     cart.forEach(
         (product, index) => {
-            total += Number(
-                product.price
-            );
+            const numericPrice =
+                Number(product.price);
+
+            if (isNaN(numericPrice)) {
+                hasCustomPrice = true;
+            } else {
+                total += numericPrice;
+            }
 
             const item = document.createElement("div");
             item.className =
                 "cart-item";
+
+            const displayPrice =
+                isNaN(numericPrice)
+                    ? product.price
+                    : product.price + " EGP";
 
             item.innerHTML = `
                 <div class="cart-item-info">
@@ -504,7 +515,7 @@ function renderCart() {
                         ${product.name}
                     </h3>
                     <p>
-                        ${product.price} EGP
+                        ${displayPrice}
                     </p>
                 </div>
                 <button
@@ -519,9 +530,9 @@ function renderCart() {
 
     /* SHOW TOTAL */
     cartTotal.textContent =
-        "Total: " +
-        total +
-        " EGP";
+        hasCustomPrice
+            ? "Total: " + total + " EGP (+ items priced on request)"
+            : "Total: " + total + " EGP";
 }
 
 /* =========================================
@@ -609,30 +620,44 @@ function buildOrderMessage(referralCode) {
     message +=
         "I would like to order:\n\n";
 
+    let total = 0;
+    let hasCustomPrice = false;
+
     cart.forEach(
         (product, index) => {
+            const numericPrice =
+                Number(product.price);
+
+            const displayPrice =
+                isNaN(numericPrice)
+                    ? product.price
+                    : product.price + " EGP";
+
+            if (isNaN(numericPrice)) {
+                hasCustomPrice = true;
+            } else {
+                total += numericPrice;
+            }
+
             message +=
                 (index + 1) +
                 ". " +
                 product.name +
                 " - " +
-                product.price +
-                " EGP\n";
+                displayPrice +
+                "\n";
         }
     );
-
-    const total =
-        cart.reduce(
-            (sum, product) =>
-                sum +
-                Number(product.price),
-            0
-        );
 
     message +=
         "\nTotal: " +
         total +
         " EGP";
+
+    if (hasCustomPrice) {
+        message +=
+            " (+ items priced on request)";
+    }
 
     if (referralCode) {
         message +=

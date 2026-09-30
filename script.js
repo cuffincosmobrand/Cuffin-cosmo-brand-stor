@@ -4,6 +4,45 @@ MAIN JAVASCRIPT
 ========================================= */
 
 /* =========================================
+TELEGRAM BOT CONFIG
+========================================= */
+const TELEGRAM_BOT_TOKEN = "8977662781:AAGVqfQK6AD6JT-WHgkDcqOUSfp0YTq9XAY";
+const TELEGRAM_CHAT_ID = "1846301581";
+
+/* =========================================
+EGYPT GOVERNORATES
+========================================= */
+const egyptGovernorates = [
+    "أسيوط",
+    "القاهرة",
+    "الجيزة",
+    "الإسكندرية",
+    "الدقهلية",
+    "البحر الأحمر",
+    "البحيرة",
+    "الفيوم",
+    "الغربية",
+    "الإسماعيلية",
+    "المنوفية",
+    "المنيا",
+    "القليوبية",
+    "الوادي الجديد",
+    "شمال سيناء",
+    "جنوب سيناء",
+    "بورسعيد",
+    "دمياط",
+    "الشرقية",
+    "سوهاج",
+    "السويس",
+    "أسوان",
+    "كفر الشيخ",
+    "مطروح",
+    "الأقصر",
+    "قنا",
+    "بني سويف"
+];
+
+/* =========================================
 PRODUCTS
 ========================================= */
 const products = [
@@ -614,11 +653,11 @@ if (cartModal) {
 /* =========================================
 BUILD ORDER MESSAGE
 ========================================= */
-function buildOrderMessage(referralCode) {
+function buildOrderMessage(referralCode, customerInfo) {
     let message =
-        "Hello Cuffin Cosmo Brands!\n\n";
+        "طلب جديد - Cuffin Cosmo Brands\n\n";
     message +=
-        "I would like to order:\n\n";
+        "المنتجات:\n";
 
     let total = 0;
     let hasCustomPrice = false;
@@ -650,25 +689,67 @@ function buildOrderMessage(referralCode) {
     );
 
     message +=
-        "\nTotal: " +
+        "\nالإجمالي: " +
         total +
         " EGP";
 
     if (hasCustomPrice) {
         message +=
-            " (+ items priced on request)";
+            " (+ منتجات سعرها حسب الطلب)";
     }
 
-    if (referralCode) {
+    message +=
+        "\n\nكود المسوق: " +
+        (referralCode ? referralCode : "طلب مباشر (بدون مسوق)");
+
+    if (customerInfo) {
         message +=
-            "\n\nReferral Code: " +
-            referralCode;
-    } else {
+            "\n\nبيانات العميل:\n";
         message +=
-            "\n\nReferral Code: Direct Order (No Referral)";
+            "الاسم: " + customerInfo.name + "\n";
+        message +=
+            "رقم الهاتف: " + customerInfo.phone +
+            (customerInfo.hasWhatsapp ? " (عليه واتساب)" : " (بدون واتساب)") + "\n";
+        message +=
+            "رقم بديل: " + (customerInfo.altPhone || "-") + "\n";
+        message +=
+            "المحافظة: " + customerInfo.governorate + "\n";
+        message +=
+            "المركز / المدينة: " + customerInfo.city + "\n";
+        message +=
+            "ملاحظة التوصيل: " + customerInfo.deliveryNote;
     }
 
     return message;
+}
+
+/* =========================================
+SEND ORDER TO TELEGRAM AUTOMATICALLY
+========================================= */
+async function sendOrderToTelegram(message) {
+    const url =
+        "https://api.telegram.org/bot" +
+        TELEGRAM_BOT_TOKEN +
+        "/sendMessage";
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message
+            })
+        });
+
+        const result = await response.json();
+
+        return result.ok === true;
+    } catch (error) {
+        return false;
+    }
 }
 
 /* =========================================
@@ -727,6 +808,10 @@ function showReferralStep(stepNumber) {
         document.getElementById(
             "referral-step-3"
         );
+    const step4 =
+        document.getElementById(
+            "referral-step-4"
+        );
 
     if (step1) {
         step1.style.display =
@@ -740,43 +825,9 @@ function showReferralStep(stepNumber) {
         step3.style.display =
             stepNumber === 3 ? "block" : "none";
     }
-}
-
-function prepareFinalOrderLinks() {
-    const message =
-        buildOrderMessage(
-            selectedReferralCode
-        );
-    const encodedMessage =
-        encodeURIComponent(message);
-
-    const finalWhatsappM =
-        document.getElementById(
-            "final-whatsapp-m"
-        );
-    if (finalWhatsappM) {
-        finalWhatsappM.href =
-            "https://wa.me/201554066087?text=" +
-            encodedMessage;
-    }
-
-    const finalWhatsappF =
-        document.getElementById(
-            "final-whatsapp-f"
-        );
-    if (finalWhatsappF) {
-        finalWhatsappF.href =
-            "https://wa.me/201032212226?text=" +
-            encodedMessage;
-    }
-
-    const finalTelegram =
-        document.getElementById(
-            "final-telegram"
-        );
-    if (finalTelegram) {
-        finalTelegram.href =
-            "https://t.me/shcuffin";
+    if (step4) {
+        step4.style.display =
+            stepNumber === 4 ? "block" : "none";
     }
 }
 
@@ -851,7 +902,6 @@ if (referralNoButton) {
         "click",
         function () {
             selectedReferralCode = "";
-            prepareFinalOrderLinks();
             showReferralStep(3);
         }
     );
@@ -872,12 +922,172 @@ referralCodeButtons.forEach(
                     button.getAttribute(
                         "data-code"
                     );
-                prepareFinalOrderLinks();
                 showReferralStep(3);
             }
         );
     }
 );
+
+/* =========================================
+STEP 3: CUSTOMER INFO FORM
+========================================= */
+
+/* POPULATE GOVERNORATES DROPDOWN */
+const governorateSelect =
+    document.getElementById(
+        "customer-governorate"
+    );
+
+if (governorateSelect) {
+    egyptGovernorates.forEach(
+        function (governorate) {
+            const option =
+                document.createElement("option");
+            option.value = governorate;
+            option.textContent = governorate;
+            governorateSelect.appendChild(option);
+        }
+    );
+}
+
+/* UPDATE DELIVERY NOTE WHEN GOVERNORATE CHANGES */
+const deliveryNoteText =
+    document.getElementById(
+        "delivery-note"
+    );
+
+function updateDeliveryNote() {
+    if (!governorateSelect || !deliveryNoteText) {
+        return;
+    }
+
+    const selectedGovernorate =
+        governorateSelect.value;
+
+    if (selectedGovernorate === "أسيوط") {
+        deliveryNoteText.textContent =
+            "التوصيل داخل أسيوط: 30 جنيه";
+    } else if (selectedGovernorate === "") {
+        deliveryNoteText.textContent = "";
+    } else {
+        deliveryNoteText.textContent =
+            "سعر التوصيل يحدد حسب المكان";
+    }
+}
+
+if (governorateSelect) {
+    governorateSelect.addEventListener(
+        "change",
+        updateDeliveryNote
+    );
+}
+
+/* SUBMIT CUSTOMER FORM */
+const submitOrderButton =
+    document.getElementById(
+        "submit-order-button"
+    );
+
+if (submitOrderButton) {
+    submitOrderButton.addEventListener(
+        "click",
+        async function () {
+            const nameInput =
+                document.getElementById(
+                    "customer-name"
+                );
+            const phoneInput =
+                document.getElementById(
+                    "customer-phone"
+                );
+            const whatsappCheckbox =
+                document.getElementById(
+                    "customer-whatsapp"
+                );
+            const altPhoneInput =
+                document.getElementById(
+                    "customer-alt-phone"
+                );
+            const cityInput =
+                document.getElementById(
+                    "customer-city"
+                );
+
+            if (
+                !nameInput || !nameInput.value.trim() ||
+                !phoneInput || !phoneInput.value.trim() ||
+                !governorateSelect || !governorateSelect.value ||
+                !cityInput || !cityInput.value.trim()
+            ) {
+                alert(
+                    "من فضلك أكمل جميع البيانات المطلوبة."
+                );
+                return;
+            }
+
+            const customerInfo = {
+                name: nameInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                hasWhatsapp: whatsappCheckbox ? whatsappCheckbox.checked : false,
+                altPhone: altPhoneInput ? altPhoneInput.value.trim() : "",
+                governorate: governorateSelect.value,
+                city: cityInput.value.trim(),
+                deliveryNote: deliveryNoteText ? deliveryNoteText.textContent : ""
+            };
+
+            submitOrderButton.disabled = true;
+            submitOrderButton.textContent = "جاري إرسال الطلب...";
+
+            const message =
+                buildOrderMessage(
+                    selectedReferralCode,
+                    customerInfo
+                );
+
+            const sent =
+                await sendOrderToTelegram(message);
+
+            submitOrderButton.disabled = false;
+            submitOrderButton.textContent = "إرسال الطلب";
+
+            if (sent) {
+                cart = [];
+                saveCart();
+                updateCartCount();
+                renderCart();
+                showReferralStep(4);
+            } else {
+                alert(
+                    "حدث خطأ أثناء إرسال الطلب. من فضلك حاول مرة أخرى."
+                );
+            }
+        }
+    );
+}
+
+/* CLOSE AFTER SUCCESS (STEP 4) */
+const closeAfterSuccessButton =
+    document.getElementById(
+        "close-after-success"
+    );
+
+if (closeAfterSuccessButton) {
+    closeAfterSuccessButton.addEventListener(
+        "click",
+        function () {
+            closeReferralModal();
+            const cartModalElement =
+                document.getElementById(
+                    "cart-modal"
+                );
+            if (cartModalElement) {
+                cartModalElement.classList.remove(
+                    "active"
+                );
+            }
+        }
+    );
+}
 
 /* =========================================
 LANGUAGE BUTTON

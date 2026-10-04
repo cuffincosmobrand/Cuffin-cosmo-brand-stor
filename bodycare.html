@@ -98,6 +98,7 @@ REFERRAL MODAL
 <div id="referral-modal">
 <div class="referral-content">
 <button id="close-referral">×</button>
+
 <div id="referral-step-1">
 <h3>هل طلبك من خلال مسوق؟</h3>
 <button id="referral-yes" class="referral-option-btn">
@@ -107,6 +108,7 @@ REFERRAL MODAL
 من دون مسوق
 </button>
 </div>
+
 <div id="referral-step-2" style="display:none;">
 <h3>اختر كود المسوق</h3>
 <button class="referral-code-btn" data-code="CCB100">
@@ -115,19 +117,58 @@ CCB100
 <button class="referral-code-btn" data-code="CCB101">
 CCB101
 </button>
+<button class="referral-code-btn" data-code="CCB103">
+CCB103
+</button>
+<button class="referral-code-btn" data-code="CCB104">
+CCB104
+</button>
 </div>
+
 <div id="referral-step-3" style="display:none;">
-<h3>اختر وسيلة التواصل</h3>
-<a id="final-whatsapp-m" href="#" target="_blank" class="order-button whatsapp">
-واتساب (M)
-</a>
-<a id="final-whatsapp-f" href="#" target="_blank" class="order-button whatsapp">
-واتساب (F)
-</a>
-<a id="final-telegram" href="#" target="_blank" class="order-button telegram">
-تيليجرام
-</a>
+<h3>بيانات التوصيل</h3>
+<div class="form-group">
+<label for="customer-name">الاسم بالكامل</label>
+<input type="text" id="customer-name" placeholder="اكتب اسمك بالكامل">
 </div>
+<div class="form-group">
+<label for="customer-phone">رقم الهاتف</label>
+<input type="tel" id="customer-phone" placeholder="01xxxxxxxxx">
+</div>
+<div class="form-checkbox">
+<input type="checkbox" id="customer-whatsapp">
+<label for="customer-whatsapp">هذا الرقم عليه واتساب</label>
+</div>
+<div class="form-group">
+<label for="customer-alt-phone">رقم هاتف بديل (اختياري)</label>
+<input type="tel" id="customer-alt-phone" placeholder="01xxxxxxxxx">
+</div>
+<div class="form-group">
+<label for="customer-governorate">المحافظة</label>
+<select id="customer-governorate">
+<option value="">اختر المحافظة</option>
+</select>
+</div>
+<div class="form-group">
+<label for="customer-city">المركز / المدينة</label>
+<input type="text" id="customer-city" placeholder="اكتب اسم المركز أو المدينة">
+</div>
+<p id="delivery-note" class="delivery-note"></p>
+<button id="submit-order-button" class="order-button whatsapp">
+إرسال الطلب
+</button>
+</div>
+
+<div id="referral-step-4" style="display:none;">
+<h3>تم إرسال طلبك بنجاح ✅</h3>
+<p class="success-text">
+هنتواصل معاك في أقرب وقت لتأكيد الطلب.
+</p>
+<button id="close-after-success" class="referral-option-btn">
+إغلاق
+</button>
+</div>
+
 </div>
 </div>
 <script src="script.js"></script>

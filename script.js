@@ -424,6 +424,16 @@ const products = [
         price: 1000,
         image: "images/gkhair-moisturizing-shampoo.jpg",
         description: "Moisturizing shampoo for smooth, hydrated hair."
+    },
+
+    /* ---------- MAVALA (BODY CARE) ---------- */
+    {
+        id: 47,
+        name: "Mavala Switzerland Nail Care",
+        category: "Body Care",
+        price: "DM",
+        image: "images/mavala-switzerland-nail-care.jpg",
+        description: "Mavala Switzerland nail care."
     }
 ];
 

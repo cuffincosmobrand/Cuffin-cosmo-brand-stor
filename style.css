@@ -537,6 +537,27 @@ MAIN STYLE
     font-size: 13px;
     }
     /* =========================================
+    BRAND SECTIONS (أقسام البراندات)
+    ========================================= */
+    .brand-section {
+    max-width: 1100px;
+    margin: 0 auto 38px;
+    }
+    .brand-title {
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #c384ff;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(181, 98, 255, 0.25);
+    }
+    .loading-text {
+    text-align: center;
+    color: #9f95a8;
+    font-size: 13px;
+    padding: 40px 0;
+    }
+    /* =========================================
     CART
     ========================================= */
     #cart-modal {
@@ -995,6 +1016,12 @@ MAIN STYLE
     .empty-products {
     padding: 25px 15px;
     margin: 10px auto;
+    }
+    .brand-section {
+    margin-bottom: 28px;
+    }
+    .brand-title {
+    font-size: 17px;
     }
     .cart-content,
     .cart-modal-content {

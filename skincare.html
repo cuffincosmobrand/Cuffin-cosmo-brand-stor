@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skin Care | Cuffin Cosmo Brands</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+<div class="header-container">
+<a href="index.html" class="logo">
+<h1>Cuffin</h1>
+<span>Cosmo Brands</span>
+</a>
+<nav class="nav">
+<a href="index.html">Home</a>
+<a href="index.html#categories">Categories</a>
+<a href="index.html#about">About Us</a>
+<a href="index.html#contact">Contact</a>
+</nav>
+<div class="header-actions">
+<button id="language-button">AR</button>
+<button id="cart-button">🛒<span id="cart-count">0</span></button>
+</div>
+</div>
+</header>
+<main>
+<section class="products-section">
+<div class="products-header">
+<div class="products-title">
+<h2>Skin Care</h2>
+<p>Explore our Skin Care collection.</p>
+</div>
+<a href="index.html" class="back-button">← Back to Home</a>
+</div>
+<div id="products-container" data-category="Skin Care">
+<p class="loading-text">Loading products...</p>
+</div>
+</section>
+</main>
+<!-- CART MODAL -->
+<div id="cart-modal">
+<div class="cart-content">
+<div class="cart-header">
+<h2>Your Cart</h2>
+<button id="close-cart">×</button>
+</div>
+<div id="cart-items"></div>
+<div id="cart-total">Total: 0 EGP</div>
+<div class="cart-actions">
+<button id="start-order-button" class="order-button whatsapp">
+إتمام الطلب
+</button>
+</div>
+</div>
+</div>
+<!-- CHECKOUT MODAL (يتبني تلقائياً من script.js) -->
+<div id="referral-modal"><div class="referral-content"></div></div>
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

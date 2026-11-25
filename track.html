@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>تتبّع طلبك | Cuffin</title><link rel="stylesheet" href="style.css">
+<style>.box{max-width:480px;margin:40px auto;padding:0 5%}.box input{width:100%;padding:10px;margin:6px 0 12px;border-radius:8px;border:1px solid #6e29a0;background:#18101f;color:#fff;direction:ltr}.st{font-size:20px;color:#c384ff;margin:14px 0}.box p,.box li{font-size:13px;color:#c9b9d5}</style></head><body>
+<div class="box"><a class="back-button" href="index.html">← الرئيسية</a><h2 style="margin:16px 0">تتبّع طلبك</h2>
+<label>رقم الطلب</label><input id="o" placeholder="ORD-00001"><label>كود التتبّع</label><input id="t">
+<button class="referral-option-btn" onclick="go()">عرض الحالة</button><div id="r"></div></div>
+<script src="config.js"></script><script>
+const L={new:"استلمنا طلبك وهنتواصل معاك",payment_review:"استلمنا طلبك، بنراجع التحويل",payment_confirmed:"وصلنا المبلغ ✅",preparing:"جاري تجهيز طلبك",shipped:"طلبك خرج للشحن 🚚",delivered:"وصلك الطلب 🎉",cancelled:"الطلب ملغي"};
+const q=new URLSearchParams(location.search),last=(JSON.parse(localStorage.getItem("cc_orders")||"[]"))[0]||{};
+o.value=q.get("o")||last.o||"";t.value=q.get("t")||last.t||"";
+const e=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+async function go(){r.innerHTML="";try{const x=await fetch(SB_URL+"/rest/v1/rpc/track_order",{method:"POST",headers:Object.assign({apikey:SB_KEY,"Content-Type":"application/json"},SB_KEY.indexOf("eyJ")==0?{Authorization:"Bearer "+SB_KEY}:{}),body:JSON.stringify({p_no:o.value.trim(),p_token:t.value.trim()})});const d=await x.json();
+if(!x.ok||!d)return r.innerHTML="<p>مفيش طلب بالبيانات دي. اتأكد من الرقم والكود.</p>";
+r.innerHTML=`<div class="st">${L[d.status]}</div>${d.note?`<p>ملاحظة: ${e(d.note)}</p>`:""}<p>آخر تحديث: ${new Date(d.updated_at).toLocaleString("ar-EG")}</p><ul>${d.items.map(i=>`<li>${e(i.name)} × ${i.qty}</li>`).join("")}</ul><p>إجمالي المنتجات: ${d.subtotal} جنيه${d.shipping_fee!=null?` + شحن ${d.shipping_fee} جنيه`:""}</p>`}catch(_){r.innerHTML="<p>حصل خطأ، جرّب تاني.</p>"}}
+if(o.value&&t.value){go();setInterval(go,60000)}
+</script></body></html>

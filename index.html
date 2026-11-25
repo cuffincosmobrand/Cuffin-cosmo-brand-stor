@@ -177,10 +177,8 @@ Track your order
 <script src="config.js"></script>
 <script src="script.js"></script>
 <script>
-(async()=>{try{const H={apikey:SB_KEY};if(SB_KEY.indexOf("eyJ")==0)H.Authorization="Bearer "+SB_KEY;
-const [c,s]=await Promise.all([fetch(SB_URL+"/rest/v1/categories?select=name,image",{headers:H}).then(r=>r.json()),fetch(SB_URL+"/rest/v1/site_settings?key=eq.hero",{headers:H}).then(r=>r.json())]);
-c.forEach(x=>{if(x.image)document.querySelectorAll('.category-card[title="'+x.name+'"] img').forEach(m=>m.src=x.image)});
-if(s[0]&&s[0].value)document.querySelector(".hero").style.backgroundImage='linear-gradient(90deg,rgba(5,3,9,.94),rgba(19,8,30,.72),rgba(7,4,12,.94)),url("'+s[0].value+'")'}catch(e){}})();
+(async()=>{try{const c=await fetch(SB_URL+"/rest/v1/categories?select=name,image",{headers:HD}).then(r=>r.json());
+c.forEach(x=>{if(x.image)document.querySelectorAll('.category-card[title="'+x.name+'"] img').forEach(m=>m.src=x.image)})}catch(e){}})();
 </script>
 </body>
 </html>

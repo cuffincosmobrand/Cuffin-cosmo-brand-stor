@@ -117,3 +117,15 @@ document.addEventListener("click", e => {
   document.body.appendChild(l);
 });
 renderCart(); loadProducts();
+
+/* ---------- خلفية الموقع كله (من لوحة الأدمن) ---------- */
+(async () => { try {
+  const s = await (await fetch(SB_URL + "/rest/v1/site_settings?key=eq.hero", {headers: HD})).json();
+  if (!s[0] || !s[0].value) return;
+  const bg = document.createElement("div");
+  bg.style.cssText = 'position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(5,3,9,.72),rgba(7,4,12,.82)),url("' + s[0].value + '") center/cover no-repeat;';
+  document.body.prepend(bg);
+  const st = document.createElement("style");
+  st.textContent = ".header{background:rgba(7,5,11,.7)!important}.hero,#categories,.about,#contact,.brand-links,.products-section{background:transparent!important}footer{background:rgba(7,5,9,.7)!important}";
+  document.head.appendChild(st);
+} catch (e) {} })();

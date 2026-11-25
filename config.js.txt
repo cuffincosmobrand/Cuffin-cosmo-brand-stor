@@ -1,2 +1,2 @@
-window.SB_URL = "https://lbauhvgpsttyvbmnjhxj.supabase.co";
-window.SB_KEY = "sb_publishable_3PE347x64A2LaHkcQj7iWw_qfg38CXn";
+window.SB_URL = "https://dhotdclrvfrzxpxhjvcv.supabase.co";
+window.SB_KEY = "sb_publishable_nr-ePvqnZoFeGRh5SUJqvw_UkUzfFRs";
